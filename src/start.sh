@@ -1,5 +1,39 @@
 #!/bin/bash
 
+function command_exists() {
+    type "$1" &>/dev/null
+}
+
+function install_fswatch_linux() {
+    sudo apt-get update
+    sudo apt-get install -y fswatch
+}
+
+function install_fswatch_mac() {
+    brew install fswatch
+}
+
+function check_fswatch() {
+    if command_exists fswatch; then
+        return
+    fi
+
+    case "$OSTYPE" in
+        linux-gnu*)
+            install_fswatch_linux
+            ;;
+        darwin*)
+            install_fswatch_mac
+            ;;
+        *)
+            echo "Unknown operating system. Please install fswatch manually."
+            ;;
+    esac
+}
+
+check_fswatch
+
+
 base_path="$HOME/dev/sisu-tech/"
 packages_path="packages/"
 
