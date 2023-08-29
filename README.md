@@ -17,7 +17,7 @@ The script performs the following steps:
 Run the script by running:
 
 ```sh
-bash start.sh
+bash src/start.sh
 ```
 
 ## npm start
